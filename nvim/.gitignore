@@ -1,0 +1,20 @@
+# Neovim swap/backup/undo files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.undo
+
+# Lazy.nvim state
+lazy-lock.json
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
