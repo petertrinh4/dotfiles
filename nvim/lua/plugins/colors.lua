@@ -4,11 +4,12 @@ local function enable_transparency()
 end
 return {
     {
-	"folke/tokyonight.nvim",
+	"ellisonleao/gruvbox.nvim",
+	priority = 1000,
 	config = function()
-	    vim.cmd.colorscheme "tokyonight"
+	    vim.cmd.colorscheme "gruvbox"
 	    enable_transparency()
-	end
+	end,
     },
     {
 	"nvim-lualine/lualine.nvim",
@@ -16,7 +17,7 @@ return {
 	    "nvim-tree/nvim-web-devicons",
 	},
 	opts = {
-	    theme = 'tokyonight',
+	    theme = 'gruvbox',
 	}
     },
 }
