@@ -1,6 +1,18 @@
-require('config.options')
-require('config.keybinds')
-require('config.lazy')
+-- 1. Set the leader key FIRST (so all plugins know it's Spacebar)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- 2. Bootstrap lazy.nvim (Downloads it if missing)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com"
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end
+vim.opt.runtimepath:prepend(lazypath)
+
+-- 3. Initialize lazy.nvim (Loads your plugins)
+require("lazy").setup("plugins")
+
+-- 4. Load your custom keymaps LAST
+require("config.keymaps")
+
