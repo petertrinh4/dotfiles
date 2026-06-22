@@ -16,3 +16,25 @@ require("lazy").setup("plugins")
 -- 4. Load your custom keymaps LAST
 require("config.keymaps")
 
+-- 5. Load options
+require("config.options")
+
+-- ==========================================
+-- 6. Custom Auto-Commands & File Syncing
+-- ==========================================
+
+-- Enable automatic reloading of files changed outside Neovim (Tmux window switching)
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+  command = "checktime",
+})
+
+-- Automatically format C/C++ files via LSP on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
